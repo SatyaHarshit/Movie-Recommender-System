@@ -2,6 +2,8 @@ import streamlit as st
 import pickle
 import pandas as pd
 import requests
+import zipfile
+import pickle
 
 def fetch(movie_title):
     api_key = "e0ba1fd0"  # Replace with your actual key
@@ -44,7 +46,9 @@ def recommend(movie):
 movies_df = pickle.load(open('movies.pkl', 'rb'))  # Load full DataFrame
 movies_list = movies_df['title'].values  # Just for selectbox display
 
-similarity = pickle.load(open('similarity.pkl', 'rb'))
+with zipfile.ZipFile("similarity.zip", "r") as zip_ref:
+    with zip_ref.open("similarity.pkl") as f:
+        similarity = pickle.load(f)
 
 st.title('Movie Recommender System')
 selected_movie_name = st.selectbox("Select a movie", movies_list)
