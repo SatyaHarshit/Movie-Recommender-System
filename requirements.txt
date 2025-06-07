@@ -4,4 +4,3 @@ pandas
 numpy
 matplotlib==3.7.1
 joblib
-python-3.10
